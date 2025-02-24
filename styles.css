@@ -778,3 +778,14 @@ button:hover {
 .cart-actions button:hover {
     background-color: #0056b3;
 }
+#cart {
+    padding: 20px;
+}
+
+.cart-summary {
+    margin-top: 20px;
+}
+
+.cart-actions {
+    margin-top: 20px;
+}

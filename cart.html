@@ -3,47 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electronix - Cart</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="navbar">
             <div class="logo">Electronics</div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <!--<li><a href="#categories">Categories</a></li>-->
                     <li><a href="#contact">Contact</a></li>
-                      <li><a href="cart.html">Cart</a></li>
+                    <li><a href="cart.html">Cart</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Cart Section -->
     <section id="cart">
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul>
-        <div class="cart-summary">
-            <p>Subtotal: <span id="cart-subtotal">0</span> AED</p>
-            <p>Shipping: <span id="cart-shipping">Free</span></p>
-            <p>Total: <span id="cart-total">0</span> AED</p>
-        </div>
-        <div class="cart-actions">
-            <button id="update-cart">Update Cart</button>
-            <button id="checkout">Checkout</button>
-        </div>
+        <h1>Your Cart</h1>
+        <div id="cart-items"></div>
+        <div id="cart-total"></div>
     </section>
 
-    <!-- Footer -->
     <footer>
         &copy; 2025 Electronix. All rights reserved.
     </footer>
 
-    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalContainer = document.getElementById('cart-total');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                let total = 0;
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    cartItemsContainer.innerHTML += `
+                        <div class="cart-item">
+                            <p>${item.name} - ${item.storage} GB</p>
+                            <p>Quantity: ${item.quantity}</p>
+                            <p>Price: AED ${item.price}</p>
+                            <p>Total: AED ${itemTotal}</p>
+                        </div>
+                    `;
+                });
+                cartTotalContainer.innerHTML = `<h2>Total: AED ${total}</h2>`;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+<!--Chatbot-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Exit Intent Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="chatbot">
+        <div id="chatbot-header">Wait! Before You Leave...</div>
+        <div id="chatbot-body"></div>
+        <div id="chatbot-footer">
+            <button onclick="closeChatbot()">Close</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/02/24/16/20250224160927-L5UNP56K.js"></script>
+    
 </body>
 </html>

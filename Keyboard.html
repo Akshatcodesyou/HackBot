@@ -87,6 +87,105 @@
         function changeImage(imageSrc) {
             document.getElementById('main-product-image').src = imageSrc;
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const addToCartButton = document.querySelector('.add-to-cart');
+
+            const updateCart = () => {
+                const cartTotalElement = document.getElementById('cart-total');
+                let total = 0;
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                });
+                cartTotalElement.textContent = total.toFixed(2);
+            };
+
+            const addToCart = (name, price, quantity) => {
+                const itemIndex = cart.findIndex(item => item.name === name);
+                if (itemIndex > -1) {
+                    cart[itemIndex].quantity += quantity;
+                } else {
+                    cart.push({ name, price, quantity });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart();
+            };
+
+            if (addToCartButton) {
+                addToCartButton.addEventListener('click', () => {
+                    const name = addToCartButton.dataset.name;
+                    const price = parseFloat(addToCartButton.dataset.price);
+                    const quantity = parseInt(document.getElementById('quantity').value, 10);
+
+                    addToCart(name, price, quantity);
+                    alert(`${name} added to cart!`);
+                });
+            }
+
+            // Update cart display on page load
+            updateCart();
+
+            // Chatbot functionality
+            let discountOffered = false;
+
+            document.addEventListener('mouseleave', function (e) {
+                if (e.clientY <= 0 && !discountOffered) {
+                    showChatbot();
+                }
+            });
+
+            function showChatbot() {
+                const chatbot = document.getElementById('chatbot');
+                const chatbotBody = document.getElementById('chatbot-body');
+                chatbot.style.display = 'block';
+                chatbotBody.innerHTML = `<p>Are you sure you want to leave? Don't miss out on a special offer!</p>
+                <button onclick="offerDiscount()" class="bg-green-500 text-white py-1 px-4 rounded">Yes, I'm leaving</button>`;
+            }
+
+            function offerDiscount() {
+                discountOffered = true;
+                const chatbotBody = document.getElementById('chatbot-body');
+                chatbotBody.innerHTML = `<p>How about a 15% discount to complete your purchase?</p>
+                <button onclick="applyDiscount()" class="bg-blue-500 text-white py-1 px-4 rounded">Apply Discount</button>
+                <button onclick="closeChatbot()" class="bg-red-500 text-white py-1 px-4 rounded">No, thanks</button>`;
+            }
+
+            function applyDiscount() {
+                alert('Discount applied! Write the code "15OFF" at checkout to enjoy 15% off.');
+                closeChatbot();
+            }
+
+            function closeChatbot() {
+                document.getElementById('chatbot').style.display = 'none';
+            }
+        });
     </script>
+</body>
+</html>
+
+<!--Chatbot-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Exit Intent Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="chatbot">
+        <div id="chatbot-header">Wait! Before You Leave...</div>
+        <div id="chatbot-body"></div>
+        <div id="chatbot-footer">
+            <button onclick="closeChatbot()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/02/24/16/20250224160927-L5UNP56K.js"></script>
+    
 </body>
 </html>
