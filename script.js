@@ -91,60 +91,108 @@ document.addEventListener('DOMContentLoaded', () => {
    }
 });
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize cart from local storage or start empty
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  // Initialize cart from local storage or start empty
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    const updateCart = () => {
-        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartItemsElement = document.getElementById('cart-items');
-        const cartTotalElement = document.getElementById('cart-total');
+  const updateCart = () => {
+      const cartItemsElement = document.getElementById('cart-items');
+      const cartSubtotalElement = document.getElementById('cart-subtotal');
+      const cartShippingElement = document.getElementById('cart-shipping');
+      const cartTotalElement = document.getElementById('cart-total');
 
-        // Clear existing items
-        cartItemsElement.innerHTML = '';
+      // Clear existing items
+      if (cartItemsElement) {
+          cartItemsElement.innerHTML = '';
+      }
 
-        // Calculate total
-        let total = 0;
-        cartItems.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} - ${item.price} AED x ${item.quantity}`;
+      // Calculate totals
+      let subtotal = 0;
+      cart.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+              <div class="product-image">
+                  <img src="${getImageForItem(item.name)}" alt="${item.name}">
+              </div>
+              <div class="product-details">
+                  <div class="product-name">${item.name}</div>
+                  <div class="product-price">${item.price} AED</div>
+                  <div class="product-quantity">Quantity: ${item.quantity}</div>
+              </div>
+              <button class="remove-item" data-name="${item.name}">Remove</button>
+          `;
+          if (cartItemsElement) {
+              cartItemsElement.appendChild(li);
+          }
+          subtotal += item.price * item.quantity;
+      });
 
-            total += item.price * item.quantity;
-            cartItemsElement.appendChild(li);
-        });
+      const shippingCost = subtotal > 0 ? 50 : 0;
+      const total = subtotal + shippingCost;
 
-        cartTotalElement.textContent = total.toFixed(2);
-    };
+      if (cartSubtotalElement) {
+          cartSubtotalElement.textContent = subtotal.toFixed(2);
+      }
+      if (cartShippingElement) {
+          cartShippingElement.textContent = shippingCost === 0 ? 'Free' : shippingCost.toFixed(2) + ' AED';
+      }
+      if (cartTotalElement) {
+          cartTotalElement.textContent = total.toFixed(2);
+      }
 
-    const addToCart = (name, price, quantity) => {
-        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const itemIndex = cartItems.findIndex(item => item.name === name);
+      localStorage.setItem('cart', JSON.stringify(cart));
+  };
 
-        if (itemIndex > -1) {
-            // Update quantity if item already exists
-            cartItems[itemIndex].quantity += quantity;
-        } else {
-            // Add new item
-            cartItems.push({ name: name, price: price, quantity: quantity });
-        }
+  const getImageForItem = (name) => {
+      // Replace with your actual image paths
+      switch (name) {
+          case 'iPhone 16E':
+              return 'assets/Iphone/image copy.png';
+          case 'MacBook Pro M4':
+              return 'assets/macbook/image copy.png';
+          case 'QwertyKeys Mechanical Keyboard':
+              return 'assets/Keyboard/image copy.png';
+          case 'Samsung Galaxy S25 Ultra':
+              return 'assets/Samsung/image copy.png';
+          default:
+              return 'assets/default.png'; // fallback image
+      }
+  };
 
-        // Update localStorage and cart display
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-        updateCart();
-    };
+  // Remove item event listener
+  document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('remove-item')) {
+          const itemName = e.target.dataset.name;
+          cart = cart.filter(item => item.name !== itemName);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          updateCart();
+      }
+  });
 
-    // Bind add to cart buttons for individual product pages
-    const addToCartButton = document.querySelector('.add-to-cart');
+  const addToCart = (name, price, quantity) => {
+    const itemIndex = cart.findIndex(item => item.name === name);
 
-    if (addToCartButton) {
-        addToCartButton.addEventListener('click', () => {
-            const name = addToCartButton.dataset.name;
-            const price = parseFloat(addToCartButton.dataset.price);
-            const quantity = parseInt(document.getElementById('quantity').value, 10);
-
-            addToCart(name, price, quantity);
-            alert(`${name} added to cart!`);
-        });
+    if (itemIndex > -1) {
+        cart[itemIndex].quantity += quantity;
+    } else {
+        cart.push({ name: name, price: price, quantity: quantity });
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+};
+
+const addToCartButton = document.querySelector('.add-to-cart');
+
+if (addToCartButton) {
+    addToCartButton.addEventListener('click', () => {
+        const name = addToCartButton.dataset.name;
+        const price = parseFloat(addToCartButton.dataset.price);
+        const quantity = parseInt(document.getElementById('quantity').value, 10);
+
+        addToCart(name, price, quantity);
+        alert(`${name} added to cart!`);
+    });
+}
 
     // Carousel functionality
     const items = document.querySelectorAll('.carousel-item');
@@ -181,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
      // Update cart display on page load
     updateCart();
 });
-
+updateCart();
 
 //CHATBOT
 let discountOffered = false;
