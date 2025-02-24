@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronix - iPhone 16E</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">Electronix</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section id="product-details">
+        <div class="product-images">
+            <div class="main-image">
+                <img id="main-product-image" src="assets/Iphone/image copy.png" alt="iPhone 16E Main">
+            </div>
+            <div class="thumbnail-images">
+                <img src="assets/Iphone/image copy.png" alt="iPhone 16E Main" onclick="changeImage('assets/Iphone/image copy.png')">
+                <img src="assets/Iphone/image copy 2.png" alt="iPhone 16E Side" onclick="changeImage('assets/Iphone/image copy 2.png')">
+                <img src="assets/Iphone/image copy 3.png" alt="iPhone 16E Back" onclick="changeImage('assets/Iphone/image copy 3.png')">
+                  <img src="assets/Iphone/image copy 4.png" alt="iPhone 16E More" onclick="changeImage('assets/Iphone/image copy 4.png')">
+            </div>
+        </div>
+        <div class="product-info">
+            <h1>iPhone 16E</h1>
+             <div class="ratings">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(4.0/5 - 245 Reviews)</span>
+            </div>
+            <p class="price">AED 2599</p>
+            <p class="description">Latest iPhone. Greatest price. Experience the future in your hands with the iPhone 16E, featuring a revolutionary A18 Bionic chip and a stunning Super Retina XDR display.</p>
+
+            <div class="key-features">
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><i class="fas fa-microchip"></i> A18 Bionic Chip</li>
+                    <li><i class="fas fa-display"></i> 6.1-inch Super Retina XDR display</li>
+                    <li><i class="fas fa-hdd"></i> 128GB, 256GB, 512GB storage options</li>
+                    <li><i class="fas fa-camera"></i> Advanced Camera System</li>
+                    <li><i class="fas fa-battery-full"></i> Improved Battery Life</li>
+                </ul>
+            </div>
+
+             <div class="options">
+              <label for="storage">Storage:</label>
+              <select id="storage">
+                <option value="128">128 GB</option>
+                <option value="256">256 GB</option>
+                <option value="512">512 GB</option>
+              </select>
+            </div>
+               <div class="quantity">
+              <label for="quantity">Quantity:</label>
+              <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </div>
+            <button class="add-to-cart" data-name="iPhone 16E" data-price="2599">
+                 <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Electronix. All rights reserved.
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+        <script>
+        function changeImage(imageSrc) {
+            document.getElementById('main-product-image').src = imageSrc;
+        }
+    </script>
+</body>
+</html>

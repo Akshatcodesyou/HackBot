@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronix - QwertyKeys Mechanical Keyboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Electronix</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="product-details">
+        <div class="product-images">
+            <div class="main-image">
+                <img id="main-product-image" src="assets/Keyboard/image copy.png" alt="QwertyKeys Main">
+            </div>
+            <div class="thumbnail-images">
+                <img src="assets/Keyboard/image copy.png" alt="QwertyKeys Main" onclick="changeImage('assets/Keyboard/image copy.png')">
+                <img src="assets/Keyboard/image copy 2.png" alt="QwertyKeys Side" onclick="changeImage('assets/Keyboard/image copy 2.png')">
+                <img src="assets/Keyboard/image copy 3.png" alt="QwertyKeys Keys" onclick="changeImage('assets/Keyboard/image copy 3.png')">
+                <img src="assets/Keyboard/image copy 4.png" alt="QwertyKeys RGB" onclick="changeImage('assets/Keyboard/image copy 4.png')">
+            </div>
+        </div>
+        <div class="product-info">
+            <h1>QwertyKeys Mechanical Keyboard</h1>
+             <div class="ratings">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(4.7/5 - 188 Reviews)</span>
+            </div>
+            <p class="price">AED 359</p>
+            <p class="description">Type with precision and style with the QwertyKeys Mechanical Keyboard. Experience superior tactile feedback and customizable RGB lighting.</p>
+
+            <div class="key-features">
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><i class="fas fa-keyboard"></i> Mechanical Switches</li>
+                    <li><i class="fas fa-palette"></i> Customizable RGB Backlighting</li>
+                    <li><i class="fas fa-key"></i> Durable Keycaps</li>
+                    <li><i class="fas fa-usb"></i> USB Type-C Connectivity</li>
+                    <li><i class="fas fa-wrench"></i> Customizable Layout</li>
+                </ul>
+            </div>
+
+            <div class="options">
+              <label for="switch">Switch Type:</label>
+              <select id="switch">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="brown">Brown</option>
+              </select>
+            </div>
+               <div class="quantity">
+              <label for="quantity">Quantity:</label>
+              <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </div>
+            <button class="add-to-cart" data-name="QwertyKeys Mechanical Keyboard" data-price="159">
+                 <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Electronix. All rights reserved.
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        function changeImage(imageSrc) {
+            document.getElementById('main-product-image').src = imageSrc;
+        }
+    </script>
+</body>
+</html>

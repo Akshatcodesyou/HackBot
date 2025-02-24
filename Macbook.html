@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronix - Macbook Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">Electronix</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section id="product-details">
+        <div class="product-images">
+            <div class="main-image">
+                <img id="main-product-image" src="assets/macbook/image copy.png" alt="Macbook Pro Main">
+            </div>
+            <div class="thumbnail-images">
+                <img src="assets/macbook/image copy.png" alt="Macbook Pro Main" onclick="changeImage('assets/macbook/image copy.png')">
+                <img src="assets/macbook/image copy 2.png" alt="Macbook Pro Side" onclick="changeImage('assets/macbook/image copy 2.png')">
+                <img src="assets/macbook/image copy 3.png" alt="Macbook Pro Keyboard" onclick="changeImage('assets/macbook/image copy 3.png')">
+                <img src="assets/macbook/image copy 4.png" alt="Macbook Pro Ports" onclick="changeImage('assets/macbook/image copy 4.png')">
+            </div>
+        </div>
+        <div class="product-info">
+            <h1>MacBook Pro M4</h1>
+             <div class="ratings">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(4.5/5 - 320 Reviews)</span>
+            </div>
+            <p class="price">AED 6499</p>
+            <p class="description">Experience unparalleled performance with the new MacBook Pro, supercharged by the M4 chip. Unleash your creativity with stunning graphics and blazing-fast speeds.</p>
+
+            <div class="key-features">
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><i class="fas fa-microchip"></i> Apple M4 Chip</li>
+                    <li><i class="fas fa-display"></i> 14-inch Liquid Retina XDR display</li>
+                    <li><i class="fas fa-hdd"></i> 512GB, 1TB, 2TB SSD Storage Options</li>
+                    <li><i class="fas fa-bolt"></i> Thunderbolt 4 Ports</li>
+                    <li><i class="fas fa-keyboard"></i> Magic Keyboard</li>
+                </ul>
+            </div>
+
+            <div class="options">
+              <label for="storage">Storage:</label>
+              <select id="storage">
+                <option value="512">512 GB</option>
+                <option value="1000">1 TB</option>
+                <option value="2000">2 TB</option>
+              </select>
+            </div>
+               <div class="quantity">
+              <label for="quantity">Quantity:</label>
+              <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </div>
+            <button class="add-to-cart" data-name="MacBook Pro M4" data-price="6499">
+                 <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Electronix. All rights reserved.
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        function changeImage(imageSrc) {
+            document.getElementById('main-product-image').src = imageSrc;
+        }
+    </script>
+</body>
+</html>
